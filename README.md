@@ -13,22 +13,25 @@ Currently only supports mice and mouse mats because I didn't have anything else 
 ## Usage
 
 ```
-USAGE: razer-cli --mode <mode> [--debug] [--color <color>] [--color2 <color2>]
+USAGE: razer-cli <mode> [--debug] [<color>] [<color2>]
+
+ARGUMENTS:
+  <mode>                  The mode to set all devices to. (off | spectrum | color | breath)
+  <color>                 The color to use when setting devices to color or breath mode.
+  <color2>                The second color to use when setting devices to breath dual color
+                          mode.
 
 OPTIONS:
-  --mode <mode>           The mode to set all devices to.
   --debug                 Whether to output debugging information
-  --color <color>         The color to use when setting devices to color or breath mode.
-  --color2 <color2>       The second color to use when setting devices to breath dual color mode.
   -h, --help              Show help information.
 ```
 
 ### Examples
 
-- `razer-cli --mode spectrum` - set all devices to spectrum mode.
-- `razer-cli --mode off` - turn all devices RGB off.
-- `razer-cli --mode color --color red` - set all devices to static red.
-- `razer-cli --mode color --color green` - set all devices to static green.
-- `razer-cli --mode color --color 0000FF` - set all devices to static blue (from hex color code).
-- `razer-cli --mode breath --color green` - set all devices to breathing mode in green.
-- `razer-cli --mode breath --color green --color2 red` - set all devices to breathing mode with green and red.
+- `razer-cli spectrum` - set all devices to spectrum mode.
+- `razer-cli off` - turn all devices RGB off.
+- `razer-cli color red` - set all devices to static red.
+- `razer-cli color green` - set all devices to static green.
+- `razer-cli color 0000FF` - set all devices to static blue (from hex color code).
+- `razer-cli breath green` - set all devices to breathing mode in green.
+- `razer-cli breath green red` - set all devices to breathing mode with green and red.

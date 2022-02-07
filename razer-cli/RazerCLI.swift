@@ -5,22 +5,26 @@ import librazer
 @main
 struct RazerCLI: ParsableCommand {
 
-    @Option(help: "The mode to set all devices to.")
+    @Argument(help: "The mode to set all devices to. (off | spectrum | color | breath)")
     var mode: RazerMode
 
     @Flag(help: "Whether to output debugging information")
     var debug: Bool = false
 
-    @Option(help: "The color to use when setting devices to color or breath mode.")
+    @Argument(help: "The color to use when setting devices to color or breath mode.")
     var color: String?
 
-    @Option(help: "The second color to use when setting devices to breath dual color mode.")
+    @Argument(help: "The second color to use when setting devices to breath dual color mode.")
     var color2: String?
 
     mutating func run() throws {
         if (mode == .color || mode == .breath) && color == nil {
-            print("You must supply a color with --color when setting mode to color or breath")
+            print("You must supply a color when setting mode to color or breath")
             return
+        }
+
+        if (mode == .color) && color2 != nil {
+            print("Warning: The second color provided (`\(color2!)`) will be ignored when setting the single color mode.")
         }
 
         if !debug {
