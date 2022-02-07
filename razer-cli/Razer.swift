@@ -11,12 +11,15 @@ struct RazerCLI: ParsableCommand {
     @Flag(help: "Whether to output debugging information")
     var debug: Bool = false
 
-    @Option(help: "The color to use when setting devices to a color mode.")
+    @Option(help: "The color to use when setting devices to color or breath mode.")
     var color: String?
 
+    @Option(help: "The second color to use when setting devices to breath dual color mode.")
+    var color2: String?
+
     mutating func run() throws {
-        if mode == .color && color == nil {
-            print("You must supply a color with --color when setting mode to color")
+        if (mode == .color || mode == .breath) && color == nil {
+            print("You must supply a color with --color when setting mode to color or breath")
             return
         }
 
@@ -38,6 +41,12 @@ struct RazerCLI: ParsableCommand {
                     writeModeSpectrumToRazerDevice(device)
                 case .color:
                     writeStaticColor(color!, to: device)
+                case .breath:
+                    if let color2 = color2 {
+                        writeBreathColor(color!, color2: color2, to: device)
+                    } else {
+                        writeBreathColor(color!, to: device)
+                    }
             }
         }
 
@@ -46,7 +55,7 @@ struct RazerCLI: ParsableCommand {
 }
 
 enum RazerMode: String, ExpressibleByArgument {
-    case off, spectrum, color
+    case off, spectrum, color, breath
 }
 
 func writeModeNoneToRazerDevice(_ device: RazerDevice) {
@@ -80,17 +89,41 @@ func writeModeSpectrumToRazerDevice(_ device: RazerDevice) {
 func writeStaticColor(_ color: String, to device: RazerDevice) {
     let colorBytes: [Int8] = parseColorString(color).map { Int8(bitPattern: UInt8($0)) }
 
-    razer_attr_write_scroll_mode_static(device.usbDevice, colorBytes, 3)
-    razer_attr_write_left_mode_static(device.usbDevice, colorBytes, 3)
-    razer_attr_write_right_mode_static(device.usbDevice, colorBytes, 3)
-    razer_attr_write_logo_mode_static(device.usbDevice, colorBytes, 3)
-    razer_mouse_mat_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_accessory_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_egpu_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_headphone_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_kraken_attr_write_mode_static(device.usbDevice, colorBytes, 3)
-//    razer_mouse_dock_attr_write_mode_static(device.usbDevice, colorBytes, 3)
+    let count = colorBytes.count
+
+    razer_attr_write_scroll_mode_static(device.usbDevice, colorBytes, count)
+    razer_attr_write_left_mode_static(device.usbDevice, colorBytes, count)
+    razer_attr_write_right_mode_static(device.usbDevice, colorBytes, count)
+    razer_attr_write_logo_mode_static(device.usbDevice, colorBytes, count)
+    razer_mouse_mat_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_accessory_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_egpu_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_headphone_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_kraken_attr_write_mode_static(device.usbDevice, colorBytes, count)
+//    razer_mouse_dock_attr_write_mode_static(device.usbDevice, colorBytes, count)
+}
+
+func writeBreathColor(_ color: String, color2: String? = nil, to device: RazerDevice) {
+    var colorBytes: [Int8] = parseColorString(color).map { Int8(bitPattern: UInt8($0)) }
+    if let color2 = color2 {
+        let colorBytes2 = parseColorString(color2).map { Int8(bitPattern: UInt8($0)) }
+        colorBytes.append(contentsOf: colorBytes2)
+    }
+
+    let count = colorBytes.count
+
+    razer_attr_write_scroll_mode_breath(device.usbDevice, colorBytes, count)
+    razer_attr_write_left_mode_breath(device.usbDevice, colorBytes, count)
+    razer_attr_write_right_mode_breath(device.usbDevice, colorBytes, count)
+    razer_attr_write_logo_mode_breath(device.usbDevice, colorBytes, count)
+    razer_mouse_mat_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_accessory_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_egpu_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_headphone_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_kraken_attr_write_mode_breath(device.usbDevice, colorBytes, count)
+//    razer_mouse_dock_attr_write_mode_breath(device.usbDevice, colorBytes, count)
 }
 
 func parseColorString(_ colorString: String) -> [Int] {

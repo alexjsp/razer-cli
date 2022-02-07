@@ -29,3 +29,5 @@ Examples:
 `razer-cli --mode color --color red` - set all devices to static red.
 `razer-cli --mode color --color green` - set all devices to static green.
 `razer-cli --mode color --color 0000FF` - set all devices to static blue (from hex color code).
+`razer-cli --mode breath --color green` - set all devices to breathing mode in green.
+`razer-cli --mode breath --color green --color2 red` - set all devices to breathing mode with green and red.
