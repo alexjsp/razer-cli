@@ -27,11 +27,19 @@ struct RazerCLI: ParsableCommand {
             print("Warning: The second color provided (`\(color2!)`) will be ignored when setting the single color mode.")
         }
 
+        let allDevices = getAllRazerDevices()
+
+        if allDevices.size == 0 {
+            print("Error: No Razer Chroma compatible devices found!")
+            return
+        }
+
         if !debug {
             fclose(stdout)
         }
-        let allDevices = getAllRazerDevices()
+
         let devices = allDevices.devices
+
         print("Razer device(s) found: ", allDevices.size)
 
         for i in 0...Int(allDevices.size - 1) {
