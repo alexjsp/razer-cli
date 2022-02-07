@@ -2,7 +2,7 @@
 
 `razer-cli` is a macOS command line tool for controlling Razer Chroma RGB peripherals, based on [librazermacos](https://github.com/1kc/librazermacos).
 
-Currently only supports mice and mouse mats because I didn't have anything else to test with.
+Currently only supports mice and mouse mats because I didn't have anything else to test with. Currently sets all devices to the same mode / color (possible to add individual device listing / control later, but not there currently).
 
 ## Building
 
