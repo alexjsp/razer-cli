@@ -3,7 +3,7 @@ import ArgumentParser
 import librazer
 
 @main
-struct RazerCommand: ParsableCommand {
+struct RazerCLI: ParsableCommand {
 
     @Option(help: "The mode to set all devices to.")
     var mode: RazerMode

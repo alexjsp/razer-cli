@@ -13,7 +13,7 @@ Currently only supports mice and mouse mats because I didn't have anything else 
 ## Usage
 
 ```
-USAGE: razer-command --mode <mode> [--debug] [--color <color>]
+USAGE: razer-cli --mode <mode> [--debug] [--color <color>]
 
 OPTIONS:
   --mode <mode>           The mode to set all devices to.
