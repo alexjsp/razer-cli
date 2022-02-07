@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FAE2D87127B1204800514998 /* Razer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2D87027B1204800514998 /* Razer.swift */; };
+		FAE2D87127B1204800514998 /* RazerCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2D87027B1204800514998 /* RazerCLI.swift */; };
 		FAE2D87927B1208500514998 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = FAE2D87827B1208500514998 /* ArgumentParser */; };
 		FAE2D88827B1375600514998 /* librazer in Frameworks */ = {isa = PBXBuildFile; productRef = FAE2D88727B1375600514998 /* librazer */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		FAE2D86D27B1204800514998 /* razer-cli */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "razer-cli"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAE2D87027B1204800514998 /* Razer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Razer.swift; sourceTree = "<group>"; };
+		FAE2D87027B1204800514998 /* RazerCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RazerCLI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 		FAE2D86F27B1204800514998 /* razer-cli */ = {
 			isa = PBXGroup;
 			children = (
-				FAE2D87027B1204800514998 /* Razer.swift */,
+				FAE2D87027B1204800514998 /* RazerCLI.swift */,
 			);
 			path = "razer-cli";
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAE2D87127B1204800514998 /* Razer.swift in Sources */,
+				FAE2D87127B1204800514998 /* RazerCLI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
