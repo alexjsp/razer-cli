@@ -1,0 +1,3 @@
+[submodule "librazermacos"]
+	path = librazermacos
+	url = git@github.com:1kc/librazermacos.git
